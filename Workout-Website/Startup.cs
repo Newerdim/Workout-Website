@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,8 @@ namespace Workout_Website
         {
             services.AddControllersWithViews();
             services.AddDbContext<DataContext>(opt => opt.UseMySql(Configuration.GetConnectionString("Default")));
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddCors(options =>
             {
