@@ -25,6 +25,17 @@ namespace Workout_Website
             services.AddControllersWithViews();
             services.AddDbContext<DataContext>(opt => opt.UseMySql(Configuration.GetConnectionString("Default")));
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                      .AllowAnyMethod()
+                      .AllowAnyHeader()
+                      .WithOrigins("http://localhost")
+                      .AllowCredentials()
+                .Build());
+            });
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -45,6 +56,8 @@ namespace Workout_Website
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
