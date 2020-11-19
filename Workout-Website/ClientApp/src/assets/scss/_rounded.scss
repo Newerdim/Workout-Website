@@ -1,0 +1,16 @@
+$border-radiuses: (
+    small: .2em,
+    base: 1.2em,
+    strong: 2em,
+    rounded: 50%
+);
+
+
+@mixin border-radius($name: base) {
+    border-radius: border-radius($name);
+    overflow: hidden;
+}
+
+@function border-radius($name) {
+    @return map-get($border-radiuses, $name);
+}
