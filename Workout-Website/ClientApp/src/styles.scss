@@ -5,6 +5,8 @@
 @import "assets/scss/nav";
 @import "assets/scss/icon";
 
+@include generate-css-variables();
+
 body {
   font-family: "Montserrat", sans-serif;
 }
