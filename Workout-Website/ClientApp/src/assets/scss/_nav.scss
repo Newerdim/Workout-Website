@@ -33,28 +33,6 @@
     margin-right: space(3);
   }
 
-  .navbar-static {
-    margin-left: auto;
-
-    ul.nav {
-      list-style-type: none;
-      padding: 0;
-
-      li {
-        @include flex(c, s, r);
-
-        span,
-        .icon {
-          margin-right: space(1);
-        }
-
-        a {
-          @include flex(c, s, r);
-        }
-      }
-    }
-  }
-
   .navbar-collapse {
     position: fixed;
     top: 50px;
@@ -148,6 +126,31 @@
               display: none;
             }
           }
+        }
+      }
+    }
+  }
+
+  .navbar-static {
+    margin-left: auto;
+
+    ul.nav {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        @include flex(c, s, r);
+
+        .icon {
+          margin-right: space(1);
+
+          @include for-desktop-up {
+            display: none;
+          }
+        }
+
+        a {
+          @include flex(c, s, r);
         }
       }
     }
