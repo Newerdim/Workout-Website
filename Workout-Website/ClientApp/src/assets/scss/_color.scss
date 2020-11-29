@@ -1,74 +1,143 @@
-$palette: (
-    primary: #256cc9, 
-    secondary: #211190,
-    accent: #EABB1F,
-    dark: #000, 
-    light: #FFF,
-    danger: #FF0000,
-    success: #00FF00,
-    warning: #ffd000,
-    shadow: rgba(0, 0, 0, 0.2),
-    border:  rgba(0, 0, 0, 0.2)
-    );
+$themes: (
+    default: (
+        primary: #256cc9,
+        secondary: #211190,
+        accent: #eabb1f,
+        dark: #181818,
+        light: #fff,
+        danger: #ff0000,
+        success: #00ff00,
+        warning: #ffd000,
+        muted: #808080,
+        border: rgba(0, 0, 0, 0.2),
+        shadow: rgba(0, 0, 0, 0.2),
+        bg: #fff,
+        text: #000,
+    ),
+    dark: (
+        primary: #256cc9,
+        secondary: #211190,
+        accent: #eabb1f,
+        dark: #181818,
+        light: #fff,
+        danger: #ff0000,
+        success: #00ff00,
+        warning: #ffd000,
+        muted: #808080,
+        border: rgba(255, 255, 255, 0.2),
+        shadow: rgba(255, 255, 255, 0.2),
+        bg: #000,
+        text: #fff,
+    ),
+);
 
-$lightness: 12%;
-$stronger-lightness: 25%;
-$strongest-lightness: 40%;
+$lightness: 10;
 
-@function color($name: primary, $tone: base) {
-    @if map-has-key($palette, $name)
-    {
-        $color: map-get($palette, $name);
+// Return color from sass palette.
+@function create-color(
+    $colorName: primary,
+    $tone: base,
+    $paletteName: default
+) {
+    @if map-has-key($themes, $paletteName) {
+        $palette: map-get($themes, $paletteName);
 
-        @if $tone == "base" {
-            @return $color;
+        @if map-has-key($palette, $colorName) {
+            $color: map-get($palette, $colorName);
+
+            @if $tone == 'base' {
+                @return $color;
+            } @else if $tone == 'dark' {
+                @return darken($color, $lightness);
+            } @else if $tone == 'light' {
+                @return lighten($color, $lightness);
+            }
+        } @else {
+            @return null;
         }
-        @else if $tone == "dark" {
-            @return darken($color, $lightness);
-        }
-        @else if $tone == "darken" {
-            @return darken($color, $stronger-lightness);
-        }
-        @else if $tone == "darkest" {
-            @return darken($color, $strongest-lightness);
-        }
-        @else if $tone == "light" {
-            @return lighten($color, $lightness);
-        }
-        @else if $tone == "lighten" {
-            @return lighten($color, $stronger-lightness);
-        }
-        @else if $tone == "lightest" {
-            @return lighten($color, $strongest-lightness);
-        }
-        @else
-        {
-            @warn "Unknown tone: #{$tone}.";
+    } @else {
+        @return null;
+    }
+}
+
+// Get all colors names
+@function get-all-colors() {
+    @return map-get($themes, default);
+}
+
+// Return css variable
+@function color($colorName: primary, $tone: base, $type: null) {
+    @if $type == null {
+        @return var(--#{$colorName}-#{$tone});
+    }
+    @return var(--#{$colorName}-#{$tone}-#{$type});
+}
+
+// Return dark or light color from palette.
+@function create-text-color($color, $paletteName) {
+    @if lightness($color) > 65 {
+        @return create-color(dark, base, $paletteName);
+    }
+    @return create-color(light, base, $paletteName);
+}
+
+// Use only for things that do not use theming.
+@mixin bg-and-text-color($colorName: primary, $tone: base) {
+    background-color: color($colorName, $tone);
+    color: color($colorName, $tone, text);
+}
+
+// Generate css variables for specified color names with dark and light variant.
+// Generate for all theme palettes.
+@mixin generate-css-variables(
+    $colorNamesWithTones: (
+        primary,
+        secondary,
+        dark,
+        light,
+        danger,
+        muted,
+        bg,
+        text,
+    ),
+    $colorNamesWithoutTones: (
+        border,
+        shadow,
+    ),
+    $tones: (
+        base,
+        dark,
+        light,
+    )
+) {
+    // For every palette in theme, create class (e.g. .default)
+    @each $palette, $value in $themes {
+        .#{$palette} {
+            @each $colorName in $colorNamesWithTones {
+                @each $tone in $tones {
+                    // Create colors for selected colorName and tone.
+                    --#{$colorName}-#{$tone}: #{create-color(
+                            $colorName,
+                            $tone,
+                            $palette
+                        )};
+                    // Create color for text (dark or light).
+                    --#{$colorName}-#{$tone}-text: #{create-text-color(
+                            create-color($colorName, $tone, $palette),
+                            $palette
+                        )};
+                    // Create color for focus shadow/border.
+                    --#{$colorName}-#{$tone}-focus: #{rgba(
+                            create-color($colorName, $tone, $palette),
+                            0.2
+                        )};
+                }
+            }
+
+            // Create color with only base tone
+            @each $colorName in $colorNamesWithoutTones {
+                --#{$colorName}: #{create-color($colorName, base, $palette)};
+            }
         }
     }
-    @else
-    {
-        @warn "Unknown color: #{$name}.";
-    }
-}
-
-@function dark-or-light-color($color) {
-    @return if(lightness($color) > 65, color(dark), color(light));
-}
-
-@function tint($color, $percentage) {
-    @return mix(white, $color, $percentage);
-}
-
-@function shade($color, $percentage) {
-    @return mix(black, $color, $percentage);
-}
-
-@mixin bg-and-text-color($color) {
-    background-color: $color;
-    color: if(lightness($color) > 65, color(dark), color(light));
-}
-
-@mixin text-color-by-lightness($color) {
-    color: if(lightness($color) > 65, color(dark), color(light));
 }

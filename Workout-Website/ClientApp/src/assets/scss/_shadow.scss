@@ -1,3 +1,22 @@
-@mixin shadow-center($color: color(light, darken), $opacity: .6) {
-    box-shadow: 0 0 0 3px rgba($color, $opacity);
+@mixin shadow-center($color: color(shadow)) {
+    box-shadow: 0 0 0.5em $color;
+}
+
+// Directions: tr (top right), tl (top left), br (bottom right), bl (bottom left), c (center)
+@mixin shadow($direction, $color: color(shadow)) {
+    @if $direction == 'tl' {
+        box-shadow: -0.2em -0.2em 0.5em $color;
+    } @else if $direction == 'tr' {
+        box-shadow: -0.2em 0.2em 0.5em $color;
+    } @else if $direction == 'bl' {
+        box-shadow: 0.2em -0.2em 0.5em $color;
+    } @else if $direction == 'br' {
+        box-shadow: 0.2em 0.2em 0.5em $color;
+    } @else if $direction == 'c' {
+        box-shadow: 0 0 0.5em $color;
+    }
+}
+
+@mixin shadow-focus($color: color(dark, dark)) {
+    box-shadow: 0 0 0 0.2em $color;
 }

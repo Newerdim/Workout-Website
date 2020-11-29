@@ -1,0 +1,36 @@
+$border-radiuses: (
+    none: 0,
+    small: 0.2em,
+    normal: 1.2em,
+    strong: 2em,
+    rounded: 50%,
+);
+
+@function border-radius($name) {
+    @return map-get($border-radiuses, $name);
+}
+
+@mixin border(
+    $color: color(border),
+    $size: 1px,
+    $radiusName: null,
+    $type: solid
+) {
+    border: $size solid $color;
+
+    @if $radiusName != null {
+        @include border-radius($radiusName);
+    }
+}
+
+@mixin border-radius($name: base) {
+    border-radius: border-radius($name);
+    overflow: hidden;
+}
+
+// Create radius classes
+@each $radiusName, $value in $border-radiuses {
+    .radius-#{$radiusName} {
+        border-radius: $value;
+    }
+}
