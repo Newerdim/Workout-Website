@@ -1,5 +1,8 @@
 @import "required";
 
+:host {
+  width: 100%;
+}
+
 .home-container {
-  @include flex-center();
 }
