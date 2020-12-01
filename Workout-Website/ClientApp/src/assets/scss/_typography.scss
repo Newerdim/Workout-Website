@@ -1,77 +1,103 @@
 $font-sizes: (
-    smaller: 0.75em,
-    small: 0.875em,
-    normal: 1em,
-    big: 1.2em,
-    bigger: 1.5em,
-    biggest: 2.5em,
+  smaller: 0.75em,
+  small: 0.875em,
+  normal: 1em,
+  big: 1.2em,
+  bigger: 1.5em,
+  biggest: 2.5em,
 );
 
 $display-sizes: (
-    6: 2.75em,
-    5: 3em,
-    4: 3.125em,
-    3: 3.25em,
-    2: 3.75em,
-    1: 4em,
+  6: 2.75em,
+  5: 3em,
+  4: 3.125em,
+  3: 3.25em,
+  2: 3.75em,
+  1: 4em,
 );
 
 $font-weights: (bold, normal, light);
 
-@function font-size($name: normal) {
-    @if map-has-key($font-sizes, $name) {
-        @return map-get($font-sizes, $name);
-    }
+$header-sizes: (
+  1: 2.5em,
+  2: 2em,
+  3: 1.75em,
+  4: 1.5em,
+  5: 1.25em,
+  6: 1em,
+);
 
-    @return null;
+@function font-size($name: normal) {
+  @if map-has-key($font-sizes, $name) {
+    @return map-get($font-sizes, $name);
+  }
+
+  @return null;
 }
 
 @function display-font-size($size: 1) {
-    @if map-has-key($display-sizes, $size) {
-        @return map-get($display-sizes, $size);
-    }
+  @if map-has-key($display-sizes, $size) {
+    @return map-get($display-sizes, $size);
+  }
 
-    @return null;
+  @return null;
 }
 
 @mixin font-size($name: normal) {
-    font-size: font-size($name);
+  font-size: font-size($name);
 }
 
 @mixin display-font-size($name: normal) {
-    font-size: font-size($name);
+  font-size: font-size($name);
 }
 
 @each $number, $value in $display-sizes {
-    .display-#{$number} {
-        font-size: $value;
-    }
+  .display-#{$number} {
+    font-size: $value;
+  }
 }
 
 @each $name, $value in $font-sizes {
-    .text-#{$name} {
-        font-size: $value;
-    }
+  .text-#{$name} {
+    font-size: $value;
+  }
 }
 
 @each $weight in $font-weights {
-    .font-weight-#{$weight} {
-        font-weight: $weight;
-    }
+  .font-weight-#{$weight} {
+    font-weight: $weight;
+  }
+}
+
+@each $size, $value in $header-sizes {
+  h#{$size} {
+    font-size: $value;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2em;
+  font-weight: bold;
+  margin: 0;
 }
 
 .font-italic {
-    text-transform: italic;
+  text-transform: italic;
 }
 
 .text-lowercase {
-    text-transform: lowercase;
+  text-transform: lowercase;
 }
 
 .text-uppercase {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .text-capitalize {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
