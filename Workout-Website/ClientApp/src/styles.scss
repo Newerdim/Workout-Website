@@ -22,3 +22,7 @@ body {
 
   @include flex(c, s, c);
 }
+
+main {
+  @include padding-yx(3, 3);
+}
