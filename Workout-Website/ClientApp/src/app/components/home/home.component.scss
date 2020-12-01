@@ -1,0 +1,5 @@
+@import "required";
+
+.home-container {
+  @include flex-center();
+}
