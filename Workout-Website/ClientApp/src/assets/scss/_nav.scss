@@ -12,6 +12,10 @@
   @include padding-yx(2, 3);
   @include flex(c, s, r);
 
+  .container {
+    @include flex-direction(r);
+  }
+
   .open-nav,
   .close-nav {
     display: none;
