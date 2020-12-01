@@ -1,0 +1,50 @@
+@import "../../../assets/scss/required";
+
+footer {
+  @include padding-yx(3, 3);
+
+  .container {
+    @include flex(st, c, c);
+
+    @include for-tablet-up() {
+      @include flex-direction(r);
+    }
+  }
+
+  section {
+    margin-bottom: space(5);
+    flex: 1;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include for-tablet-up {
+      margin-bottom: 0;
+      margin-right: space(5);
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    h5 {
+      margin-bottom: space(3);
+    }
+
+    p {
+      line-height: 1.3em;
+      a {
+        font-weight: bold;
+        color: color(primary);
+        padding: 0;
+      }
+    }
+
+    .nav {
+      li {
+        margin-bottom: space(2);
+      }
+    }
+  }
+}

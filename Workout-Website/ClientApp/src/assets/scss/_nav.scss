@@ -1,172 +1,171 @@
-@import 'required';
+@import "required";
 
 .navbar {
-    height: 50px;
-    z-index: 100;
-    position: sticky;
-    top: 0;
-    left: 0;
-    background-color: color(light);
+  height: 50px;
+  z-index: 100;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: color(bg);
+  margin-bottom: space(3);
 
-    @include padding-yx(2, 4);
-    @include flex(c, s, r);
+  @include padding-yx(2, 3);
+  @include flex(c, s, r);
 
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background-color: color(light, dark);
+  .container {
+    @include flex-direction(r);
+  }
+
+  .open-nav,
+  .close-nav {
+    display: none;
+    margin-right: space(1);
+
+    &.active {
+      display: block;
     }
 
-    .container {
-        max-width: 1000px;
-        width: 100%;
-        height: 100%;
-        margin: auto;
-
-        @include flex(c, s, r);
-    }
-
-    .open-nav,
-    .close-nav {
+    @include for-desktop-up {
+      &.active {
         display: none;
-        margin-right: space(3);
+      }
+    }
+  }
 
-        &.active {
-            display: block;
-        }
+  .brand {
+    font-weight: bold;
+    margin-right: space(3);
+  }
 
+  .navbar-collapse {
+    position: fixed;
+    top: 50px;
+    left: -100%;
+    height: 100%;
+    max-height: calc(100vh - 50px);
+    transition: left $transition-duration;
+
+    @include flex();
+    @include for-desktop-up {
+      margin-left: space(auto);
+    }
+
+    &.active {
+      left: 0;
+
+      .curtain {
+        display: block;
         @include for-desktop-up {
-            &.active {
-                display: none;
-            }
+          display: none;
         }
+      }
     }
 
-    .brand {
-        font-weight: bold;
-        margin-right: space(3);
+    @include for-desktop-up {
+      position: static;
+      height: auto;
     }
 
-    .navbar-collapse {
-        position: fixed;
-        top: 50px;
-        left: -100%;
-        height: 100%;
-        max-height: calc(100vh - 50px);
-        transition: left $transition-duration;
-
-        @include flex();
-
-        &.active {
-            left: 0;
-
-            .curtain {
-                display: block;
-                @include for-desktop-up {
-                    display: none;
-                }
-            }
-        }
-
-        @include for-desktop-up {
-            position: static;
-            height: auto;
-        }
-
-        .curtain {
-            position: fixed;
-            top: 50px;
-            left: 0;
-            background-color: color(dark);
-            opacity: 0.2;
-            width: 100%;
-            height: calc(100% - 50px);
-            z-index: -1;
-            display: none;
-        }
-
-        .nav-container {
-            background-color: color(light);
-            height: 100%;
-            min-width: 200px;
-            overflow-y: auto;
-
-            @include flex-center();
-            @include padding-yx(2, 4);
-
-            @include for-desktop-up {
-                background: transparent;
-                @include padding-all(0);
-            }
-
-            ul.nav {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                height: fit-content;
-
-                @include margin-yx(auto, 0);
-                @include flex(s, c, c);
-
-                @include for-desktop-up {
-                    @include flex(c, s, r);
-                }
-
-                li {
-                    @include flex(c, s, r);
-                    @include margin-yx(3, 0);
-
-                    @include for-desktop-up {
-                        @include margin-yx(0, 3);
-                    }
-
-                    a {
-                        @include flex(c, s, r);
-
-                        &.active {
-                            font-weight: bold;
-
-                            @include for-desktop-up {
-                                font-weight: initial;
-                                @include underline(color(primary));
-                            }
-                        }
-                    }
-
-                    .icon {
-                        margin-right: space(2);
-
-                        @include for-desktop-up {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
+    .curtain {
+      position: fixed;
+      top: 50px;
+      left: 0;
+      background-color: color(dark);
+      opacity: 0.2;
+      width: 100%;
+      height: calc(100% - 50px);
+      z-index: -1;
+      display: none;
     }
 
-    .navbar-static {
+    .nav-container {
+      background-color: color(bg);
+      height: 100%;
+      min-width: 200px;
+      overflow-y: auto;
+
+      @include flex-center();
+      @include padding-yx(2, 4);
+
+      @include for-desktop-up {
+        background: transparent;
         margin-left: auto;
 
-        ul.nav {
-            list-style-type: none;
-            padding: 0;
+        @include padding-all(0);
+      }
 
-            li {
-                @include flex(c, s, r);
+      ul.nav {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        height: fit-content;
 
-                span {
-                    margin-right: space(2);
-                }
+        @include margin-yx(auto, 0);
+        @include flex(s, c, c);
 
-                a {
-                    @include flex(c, s, r);
-                }
-            }
+        @include for-desktop-up {
+          @include flex(c, s, r);
         }
+
+        li {
+          @include flex(c, s, r);
+          @include margin-yx(3, 0);
+
+          @include for-desktop-up {
+            @include margin-yx(0, 3);
+          }
+
+          a {
+            @include flex(c, s, r);
+
+            &.active {
+              font-weight: bold;
+
+              @include for-desktop-up {
+                font-weight: initial;
+                @include underline(color(primary));
+              }
+            }
+          }
+
+          .icon {
+            margin-right: space(1);
+
+            @include for-desktop-up {
+              display: none;
+            }
+          }
+        }
+      }
     }
+  }
+
+  .navbar-static {
+    margin-left: auto;
+
+    @include for-desktop-up {
+      margin-left: 0;
+    }
+
+    ul.nav {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        @include flex(c, s, r);
+
+        .icon {
+          margin-right: space(1);
+
+          @include for-desktop-up {
+            display: none;
+          }
+        }
+
+        a {
+          @include flex(c, s, r);
+        }
+      }
+    }
+  }
 }

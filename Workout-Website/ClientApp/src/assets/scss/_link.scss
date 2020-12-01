@@ -1,21 +1,22 @@
-@import 'shadow';
-@import 'spacing';
+@import "shadow";
+@import "spacing";
 
 a {
-    text-decoration: none;
-    font-size: 1em;
-    display: inline-block;
-    cursor: pointer;
+  text-decoration: none;
+  font-size: 1em;
+  display: inline-block;
+  cursor: pointer;
+  color: inherit;
 
-    @include padding-all(1);
+  @include padding-all(1);
 
-    &:focus {
-        outline: none;
+  &:focus {
+    outline: none;
 
-        @include shadow-focus();
-    }
+    @include shadow-focus();
+  }
 
-    &:hover {
-        color: color(primary);
-    }
+  &:hover {
+    color: color(primary);
+  }
 }
