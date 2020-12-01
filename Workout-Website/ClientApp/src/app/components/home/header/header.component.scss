@@ -1,0 +1,50 @@
+@import "required";
+
+header {
+  margin-bottom: space(4);
+
+  @include for-phone-up {
+    @include flex(c, sb, rr);
+  }
+
+  .image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+
+    @include for-phone-up {
+      flex: 1;
+      height: 300px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .header-text {
+    margin-top: space(4);
+
+    @include for-phone-up {
+      margin-right: space(5);
+
+      @include for-phone-up {
+        flex: 1;
+      }
+    }
+
+    h1 {
+      font-size: font-size(bigger);
+      margin-bottom: space(2);
+
+      @include for-phone-up {
+        font-size: font-size(biggest);
+      }
+    }
+
+    p {
+      margin-bottom: space(3);
+    }
+  }
+}
