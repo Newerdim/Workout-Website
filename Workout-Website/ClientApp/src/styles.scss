@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
-@import "assets/scss/required";
-@import "assets/scss/button";
-@import "assets/scss/nav";
-@import "assets/scss/icon";
+@import "required";
+@import "button";
+@import "nav";
+@import "icon";
 
 @include generate-css-variables();
 
