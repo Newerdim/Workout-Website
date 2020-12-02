@@ -1,12 +1,28 @@
 @import "required";
 
 .card-list {
-  margin-bottom: space(6);
-  @include flex(c, c, c);
+  margin-bottom: space(5);
+
+  @include flex(st, c, r);
+  @include flex-flow(r, w);
+
+  @include for-tablet-up {
+    @include flex-direction(r);
+  }
 
   .card {
-    margin-bottom: space(6);
+    transition: transform 0.3s;
+    width: 285px;
+
+    &:hover {
+      transform: translateY(-20px);
+    }
+
+    @include margin-yx(4, 4);
+    @include shadow(br, color(shadow));
+    @include padding-yx(5, 5);
     @include flex(c, c, c);
+
     .icon {
       width: auto;
       height: 100px;
@@ -14,6 +30,7 @@
     }
     h3 {
       text-align: center;
+      font-weight: normal;
     }
   }
 }
