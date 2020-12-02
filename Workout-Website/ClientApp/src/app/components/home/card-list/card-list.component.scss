@@ -1,0 +1,19 @@
+@import "required";
+
+.card-list {
+  margin-bottom: space(6);
+  @include flex(c, c, c);
+
+  .card {
+    margin-bottom: space(6);
+    @include flex(c, c, c);
+    .icon {
+      width: auto;
+      height: 100px;
+      margin-bottom: space(4);
+    }
+    h3 {
+      text-align: center;
+    }
+  }
+}
