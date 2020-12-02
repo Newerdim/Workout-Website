@@ -23,11 +23,12 @@
     @include padding-yx(5, 5);
     @include flex(c, c, c);
 
-    .icon {
+    img {
       width: auto;
       height: 100px;
       margin-bottom: space(4);
     }
+
     h3 {
       text-align: center;
       font-weight: normal;
