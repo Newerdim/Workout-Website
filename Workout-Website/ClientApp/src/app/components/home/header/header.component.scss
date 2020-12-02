@@ -1,7 +1,7 @@
 @import "required";
 
 header {
-  margin-bottom: space(4);
+  margin-bottom: space(5);
 
   @include for-phone-up {
     @include flex(c, sb, rr);
@@ -9,8 +9,9 @@ header {
 
   .image-container {
     width: 100%;
-    height: 200px;
     overflow: hidden;
+
+    @include flex-center();
 
     @include for-phone-up {
       flex: 1;
@@ -27,6 +28,7 @@ header {
     margin-top: space(4);
 
     @include for-phone-up {
+      margin-top: 0;
       margin-right: space(5);
 
       @include for-phone-up {
@@ -38,13 +40,14 @@ header {
       font-size: font-size(bigger);
       margin-bottom: space(2);
 
-      @include for-phone-up {
+      @include for-tablet-up {
         font-size: font-size(biggest);
       }
     }
 
     p {
       margin-bottom: space(3);
+      color: color(muted);
     }
   }
 }
