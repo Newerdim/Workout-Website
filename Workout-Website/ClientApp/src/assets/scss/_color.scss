@@ -136,7 +136,7 @@ $lightness: 10;
 
       // Create color with only base tone
       @each $colorName in $colorNamesWithoutTones {
-        --#{$colorName}: #{create-color($colorName, base, $palette)};
+        --#{$colorName}-base: #{create-color($colorName, base, $palette)};
       }
     }
   }
