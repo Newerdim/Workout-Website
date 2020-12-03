@@ -1,22 +1,25 @@
+$shadow-offset: 0.2em;
+$shadow-spread: 0.5em;
+
 @mixin shadow-center($color: color(shadow)) {
-    box-shadow: 0 0 0.5em $color;
+  box-shadow: 0 0 $shadow-spread $color;
 }
 
 // Directions: tr (top right), tl (top left), br (bottom right), bl (bottom left), c (center)
 @mixin shadow($direction, $color: color(shadow)) {
-    @if $direction == 'tl' {
-        box-shadow: -0.2em -0.2em 0.5em $color;
-    } @else if $direction == 'tr' {
-        box-shadow: -0.2em 0.2em 0.5em $color;
-    } @else if $direction == 'bl' {
-        box-shadow: 0.2em -0.2em 0.5em $color;
-    } @else if $direction == 'br' {
-        box-shadow: 0.2em 0.2em 0.5em $color;
-    } @else if $direction == 'c' {
-        box-shadow: 0 0 0.5em $color;
-    }
+  @if $direction == "tl" {
+    box-shadow: -$shadow-offset -$shadow-offset $shadow-spread $color;
+  } @else if $direction == "tr" {
+    box-shadow: -$shadow-offset $shadow-offset $shadow-spread $color;
+  } @else if $direction == "bl" {
+    box-shadow: $shadow-offset -$shadow-offset $shadow-spread $color;
+  } @else if $direction == "br" {
+    box-shadow: $shadow-offset $shadow-offset $shadow-spread $color;
+  } @else if $direction == "c" {
+    box-shadow: 0 0 $shadow-spread $color;
+  }
 }
 
 @mixin shadow-focus($color: color(dark, dark)) {
-    box-shadow: 0 0 0 0.2em $color;
+  box-shadow: 0 0 0 $shadow-offset $color;
 }
