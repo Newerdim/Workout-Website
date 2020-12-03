@@ -1,13 +1,17 @@
 @import "required";
 
 .card-list {
-  margin-bottom: space(5);
+  margin-bottom: space(6);
 
   @include flex(st, c, r);
   @include flex-flow(r, w);
 
   @include for-tablet-up {
     @include flex-direction(r);
+  }
+
+  @include for-desktop-up {
+    @include flex(st, sb, r);
   }
 
   .card {
@@ -22,6 +26,10 @@
     @include shadow(br, color(shadow));
     @include padding-yx(5, 5);
     @include flex(c, c, c);
+
+    @include for-desktop-up {
+      margin: 0;
+    }
 
     img {
       width: auto;
