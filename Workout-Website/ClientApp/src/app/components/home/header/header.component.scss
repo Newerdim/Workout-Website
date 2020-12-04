@@ -20,7 +20,7 @@ header {
   }
 
   .header-text {
-    margin-top: space(4);
+    margin-top: space(5);
 
     @include for-phone-up {
       margin-top: 0;
