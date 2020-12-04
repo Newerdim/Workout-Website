@@ -1,2 +1,65 @@
+@import "required";
+
 .horizontal-cards-container {
+  .horizontal-card {
+    margin-bottom: space(6);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include for-phone-up {
+      @include flex(c, sb, rr);
+
+      &.flip {
+        @include flex(c, sb, r);
+
+        .card-text {
+          margin-right: 0;
+          margin-left: space(5);
+        }
+      }
+    }
+
+    .image-container {
+      width: 100%;
+
+      @include flex-center();
+
+      @include for-phone-up {
+        flex: 1;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .card-text {
+      margin-top: space(4);
+
+      @include for-phone-up {
+        margin-top: 0;
+        margin-right: space(5);
+
+        @include for-phone-up {
+          flex: 1;
+        }
+      }
+
+      h1 {
+        font-size: font-size(bigger);
+        margin-bottom: space(2);
+
+        @include for-tablet-up {
+          font-size: font-size(biggest);
+        }
+      }
+
+      p {
+        margin-bottom: space(3);
+        color: color(muted);
+      }
+    }
+  }
 }
