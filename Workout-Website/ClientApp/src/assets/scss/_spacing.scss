@@ -64,9 +64,9 @@ $values: (
 }
 
 .spacer {
-  margin-bottom: space(5);
+  height: space(5);
 
-  @include for-desktop-up {
-    margin-bottom: space(6);
+  @include for-phone-up {
+    height: space(6);
   }
 }
