@@ -2,13 +2,15 @@
 
 .horizontal-cards-container {
   .horizontal-card {
-    margin-bottom: space(6);
+    margin-bottom: space(5);
 
     &:last-child {
       margin-bottom: 0;
     }
 
     @include for-phone-up {
+      margin-bottom: space(6);
+
       @include flex(c, sb, rr);
 
       &.flip {
