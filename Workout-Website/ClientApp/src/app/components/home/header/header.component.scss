@@ -1,14 +1,8 @@
 @import "required";
 
 header {
-  margin-bottom: space(5);
-
   @include for-phone-up {
     @include flex(c, sb, rr);
-  }
-
-  @include for-desktop-up {
-    margin-bottom: space(6);
   }
 
   .image-container {

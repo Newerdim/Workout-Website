@@ -1,8 +1,6 @@
 @import "required";
 
 .card-list {
-  margin-bottom: space(6);
-
   @include flex(st, c, r);
   @include flex-flow(r, w);
 
