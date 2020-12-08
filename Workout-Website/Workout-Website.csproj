@@ -23,8 +23,12 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="EmailService\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="EmailService\**" />
+    <EmbeddedResource Remove="EmailService\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="EmailService\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
@@ -32,6 +36,10 @@
     <Folder Include="Data\Interfaces\" />
     <Folder Include="Dtos\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmailService\EmailService.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

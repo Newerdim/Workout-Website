@@ -1,4 +1,5 @@
 using AutoMapper;
+using EmailService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +39,14 @@ namespace Workout_Website
                       .AllowCredentials()
                 .Build());
             });
+
+            // Add email configuration
+            var emailConfig = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+
+            services.AddScoped<IEmailSender, EmailSender>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
